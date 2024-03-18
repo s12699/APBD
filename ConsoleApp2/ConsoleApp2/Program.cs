@@ -13,9 +13,9 @@ static int average(int[] ave)
     int sum = 0;
     int counter = 0;
     
-    for (int i = 0; i < ave.Length; i++)
+    for (int t = 0; t < ave.Length; t++)
     {
-        sum += ave[i];
+        sum += ave[t];
         counter++;
 
     }
