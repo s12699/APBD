@@ -6,6 +6,7 @@ Console.WriteLine("Witaj, swiecie!");
 Console.WriteLine("Hei maailma!");
 
 int[] testVal= [2, 5, 5, 6, 4, 3];
+int[] testVal2 = [1, 16, 5345, 9, 0, 23424, 42];
 
 static int average(int[] ave)
 {
@@ -25,3 +26,22 @@ static int average(int[] ave)
 }
 
 Console.WriteLine(average(testVal));
+
+
+static int maximum(int[] max)
+{
+    int maxVal = 0;
+    //int tmp = 0;
+
+    for (int i = 0; i < max.Length; i++)
+    {
+        if (maxVal < max[i])
+        {
+            maxVal = max[i];
+        }
+    }
+
+    return maxVal;
+}
+
+Console.WriteLine(maximum(testVal2));
