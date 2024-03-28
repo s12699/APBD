@@ -1,6 +1,6 @@
 namespace ContainerShip.Assignment2;
 
-public class GasContainer : Container
+public class GasContainer //: Container
 {
     
 }

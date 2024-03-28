@@ -14,10 +14,73 @@ public class Container
     //depth in cm
     public int depth;
     
+    //payload in Kg
+    public int payload;
     //serial number
     public string serialNumber;
     
     //index is used to give unique serial
     private static int index = 0;
 
+    public void EmptyContainer ()
+    {
+        cargoMass = 0;
+        Console.WriteLine("Emptying container: " + serialNumber);
+    }
+
+    public void LoadContainer(int massShipment)
+    {
+
+       try
+       {
+           if ((payload - cargoMass) < massShipment)
+           {
+               throw new OverflowException();
+           }
+           else
+           {
+               cargoMass = cargoMass + massShipment;
+               Console.WriteLine("Container: " + serialNumber + " loaded with " + massShipment + " Kg of cargo"); 
+           }
+
+       }
+       catch (OverflowException exc)
+       {
+           Console.WriteLine("XXX Too much cargo to load XXX");
+       }
+    }
+
+    private string GenerateSerialNumber()
+    {
+        index++;
+        string prefix = "KON";
+        string dash = "-";
+        string discriminant = "something";
+        
+        string plate = prefix + dash + discriminant + dash + index;
+        
+        return plate;
+    }
+
+    public Container(int height, int depth, int tareWeight, int payload, int cargoMass)
+    {
+        this.height = height;
+        this.depth = depth;
+        this.tareWeight = tareWeight;
+        this.payload = payload;
+        this.cargoMass = cargoMass;
+        serialNumber = GenerateSerialNumber();
+    }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine("==========================================");
+        Console.WriteLine("Container: "+ serialNumber + " information:");
+        Console.WriteLine("Height: " + height + "cm");
+        Console.WriteLine("Depth: " + depth + "cm");
+        Console.WriteLine("Tare weight: " + tareWeight + "Kg");
+        Console.WriteLine("Payload: " + payload + "Kg");
+        Console.WriteLine("Mass of cargo: " + cargoMass + "Kg");
+        Console.WriteLine("Serial number: " + serialNumber);
+    }
 }
