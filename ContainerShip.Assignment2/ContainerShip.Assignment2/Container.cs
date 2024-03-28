@@ -35,7 +35,7 @@ public class Container
        {
            if ((payload - cargoMass) < massShipment)
            {
-               throw new OverflowException();
+               throw new OverfillException("Not enough space for shipment");
            }
            else
            {
@@ -44,8 +44,9 @@ public class Container
            }
 
        }
-       catch (OverflowException exc)
+       catch (OverfillException exc)
        {
+           Console.WriteLine(exc);
            Console.WriteLine("XXX Too much cargo to load XXX");
        }
     }
