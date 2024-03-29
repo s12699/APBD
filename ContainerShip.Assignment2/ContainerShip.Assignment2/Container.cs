@@ -63,13 +63,13 @@ public class Container
         return plate;
     }
 
-    public Container(int height, int depth, int tareWeight, int payload, int cargoMass)
+    public Container(int height, int depth, int tareWeight, int payload)
     {
         this.height = height;
         this.depth = depth;
         this.tareWeight = tareWeight;
         this.payload = payload;
-        this.cargoMass = cargoMass;
+        //this.cargoMass = cargoMass;
         serialNumber = GenerateSerialNumber();
     }
 
