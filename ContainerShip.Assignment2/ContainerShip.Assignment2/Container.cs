@@ -2,19 +2,19 @@ namespace ContainerShip.Assignment2;
 
 public class Container
 {
-    //cargoMass in Kg
+    //cargoMass in kg
     public int cargoMass;
     
     //height in cm
     public int height;
     
-    //tareWeight in Kg
+    //tareWeight in kg
     public int tareWeight;
     
     //depth in cm
     public int depth;
     
-    //payload in Kg
+    //payload in kg
     public int payload;
     //serial number
     public string serialNumber;
@@ -22,13 +22,13 @@ public class Container
     //index is used to give unique serial
     protected static int index = 0;
 
-    public void EmptyContainer ()
+    public virtual void EmptyContainer ()
     {
         cargoMass = 0;
         Console.WriteLine("Emptying container: " + serialNumber);
     }
 
-    public void LoadContainer(int massShipment)
+    public virtual void LoadContainer(int massShipment)
     {
 
        try
@@ -73,7 +73,7 @@ public class Container
         serialNumber = GenerateSerialNumber();
     }
 
-    public void DisplayInfo()
+    public virtual void DisplayInfo()
     {
         Console.WriteLine("==========================================");
         Console.WriteLine("Container: "+ serialNumber + " information:");
