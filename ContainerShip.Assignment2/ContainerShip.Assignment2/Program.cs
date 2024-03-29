@@ -7,16 +7,20 @@ public class ContainerShip
     {
         Console.WriteLine("Hello, World!");
 
-        Container ad = new Container(2, 3, 4, 10, 2);
+        LiquidContainer ald = new LiquidContainer(2, 3, 4, 10, 2);
+        Container con = new Container(1, 2, 15, 10, 0);
 
-        ad.DisplayInfo();
-        ad.EmptyContainer();
-        ad.DisplayInfo();
-        ad.LoadContainer(5);
-        ad.DisplayInfo();
-        ad.LoadContainer(6);
-        ad.DisplayInfo();
-     
+        ald.DisplayInfo();
+        ald.EmptyContainer();
+        ald.DisplayInfo();
+        ald.LoadContainer(5);
+        ald.DisplayInfo();
+        ald.LoadContainer(6);
+        ald.DisplayInfo();
+        con.DisplayInfo();
+       // Console.WriteLine(ald.serialNumber);
+       
+
     }
 }
 

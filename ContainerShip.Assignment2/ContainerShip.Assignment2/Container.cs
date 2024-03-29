@@ -20,7 +20,7 @@ public class Container
     public string serialNumber;
     
     //index is used to give unique serial
-    private static int index = 0;
+    protected static int index = 0;
 
     public void EmptyContainer ()
     {
@@ -51,12 +51,12 @@ public class Container
        }
     }
 
-    private string GenerateSerialNumber()
+    protected virtual string GenerateSerialNumber()
     {
         index++;
         string prefix = "KON";
         string dash = "-";
-        string discriminant = "something";
+        string discriminant = "";
         
         string plate = prefix + dash + discriminant + dash + index;
         
@@ -83,5 +83,6 @@ public class Container
         Console.WriteLine("Payload: " + payload + "Kg");
         Console.WriteLine("Mass of cargo: " + cargoMass + "Kg");
         Console.WriteLine("Serial number: " + serialNumber);
+        Console.WriteLine("==========================================");
     }
 }
