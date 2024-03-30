@@ -12,12 +12,14 @@ public class ContainerShip
         LiquidContainer lc = new LiquidContainer(3, 4, 5, 100);
         GasContainer gc = new GasContainer(5, 5, 15, 100);
 
-        ald.DisplayInfo();
+        /*ald.DisplayInfo();
         con.DisplayInfo();
         lc.DisplayInfo();
-        gc.DisplayInfo();
-  
+        gc.DisplayInfo();*/
 
+        Ship spgShip = new Ship(150, 200, 1000);
+        spgShip.LoadToShip(ald);
+        spgShip.ShipInfo();
 
     }
 }
