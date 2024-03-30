@@ -7,21 +7,17 @@ public class ContainerShip
     {
         
 
-        GasContainer ald = new GasContainer(2, 3, 4, 100);
-        //Container con = new Container(1, 2, 15, 10, 0);
+        RefrigeratedContainer ald = new RefrigeratedContainer(2, 3, 4, 100);
+        Container con = new Container(1, 2, 15, 10);
+        LiquidContainer lc = new LiquidContainer(3, 4, 5, 100);
+        GasContainer gc = new GasContainer(5, 5, 15, 100);
 
         ald.DisplayInfo();
-        ald.LoadContainer(25);
-        ald.DisplayInfo();
-        ald.EmptyContainer();
-        ald.DisplayInfo();
-        //ald.LoadContainer(1110, true);
-        //ald.DisplayInfo();
-        //ald.LoadContainer(6);
-        //ald.DisplayInfo();
-        //con.DisplayInfo();
-        //Console.WriteLine(ald.pressure);
-       
+        con.DisplayInfo();
+        lc.DisplayInfo();
+        gc.DisplayInfo();
+  
+
 
     }
 }
