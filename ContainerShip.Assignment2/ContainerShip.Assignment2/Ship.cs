@@ -16,19 +16,19 @@ public class Ship
     private double _maxCargoWeight;
     private double _currentCargoWeight;
 
-    public Ship(/*HashSet<Container> containers, */int maxSpeed, int maxContainersNumber, int maxCargoWeight)
+    public Ship(int maxSpeed, int maxContainersNumber, int maxCargoWeight)
     {
         _containers = new Dictionary<String, Container>();
         _maxSpeed = maxSpeed;
         _maxContainersNumber = maxContainersNumber;
         _maxCargoWeight = maxCargoWeight;
-        
+
     }
 
     public void LoadToShip(Container con)
     {
 
-        if ((_currentContainersNumber < _maxContainersNumber) && ((_maxCargoWeight - _currentCargoWeight) > ((con.tareWeight+con.cargoMass)*0.001)))
+        if ((_currentContainersNumber < _maxContainersNumber) && ((_maxCargoWeight - _currentCargoWeight) >= ((con.tareWeight+con.cargoMass)*0.001)))
         {
             _containers.Add(con.serialNumber, con);
             _currentContainersNumber++;
@@ -58,11 +58,7 @@ public class Ship
         {
             Console.WriteLine(key);
         }
-        //_containers.ToString();
-        
-        //Console.WriteLine(_containers["KON--2"].DisplayInfo());
-        //_containers["KON--2"].DisplayInfo();
-        
+  
     }
 
     public void RemoveContainer(Container con)
@@ -82,4 +78,48 @@ public class Ship
         
     }
     
+    public void LoadContainerList(List<Container> con)
+    {
+        foreach (Container element in con)
+        {
+            LoadToShip(element);
+        }
+    }
+
+    public void ReplaceContainer(string conKey, Container con)
+    {
+        double toFreeWeight = Math.Round(((_containers[conKey].tareWeight + _containers[conKey].cargoMass) * 0.001), 3);
+        double toLoadWeight = Math.Round(((con.tareWeight + con.cargoMass) * 0.001), 3);
+        double tempWeight = _maxCargoWeight - (_currentCargoWeight - toFreeWeight);
+
+        if (tempWeight > toLoadWeight)
+        {
+            Console.WriteLine("Replace container: " + conKey + " with container: " + con.serialNumber);
+            _containers.Remove(conKey);
+            LoadToShip(con);
+        }
+        else
+        {
+            Console.WriteLine("Replace is impossible, because weight of container " + con.serialNumber + " would exceed max cargo weight");
+        }
+    }
+
+    public void transferContainer(Ship targetShip, Container con)
+    {
+        bool isFreeSpace = (targetShip._maxContainersNumber - targetShip._currentContainersNumber) > 0;
+        //double toFreeWeight = Math.Round(((_containers[conKey].tareWeight + _containers[conKey].cargoMass) * 0.001), 3);
+        double toLoadWeight = Math.Round(((con.tareWeight + con.cargoMass) * 0.001), 3);
+        double tempFreeWeight = _maxCargoWeight - _currentCargoWeight;
+
+        if (isFreeSpace == true && tempFreeWeight > toLoadWeight)
+        {
+            Console.WriteLine("Transfer container: " + con.serialNumber + " to another ship");
+            _containers.Remove(con.serialNumber);
+            targetShip.LoadToShip(con);
+        }
+        else
+        {
+            Console.WriteLine("On ship " + targetShip + " is no space for the container");
+        }
+    }
 }
