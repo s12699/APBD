@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using REST.API.Assignment4;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,5 +34,39 @@ app.MapGet("/api/animals/{id:int}", (int id) =>
         return animal == null ? Results.NotFound($"Animal with id{id} was not found") : Results.Ok(animal);
     })
     .WithName("GetAnimal").WithOpenApi();
+
+app.MapPost("/api/animals", (Animal animal) =>
+    {
+        _animal.Add(animal);
+        return Results.StatusCode(StatusCodes.Status201Created);
+    })
+    .WithName("CreateAnimal").WithOpenApi();
+
+app.MapPut("/api/animals/{id:int}", (int id, Animal animal) =>
+    {
+        var animalToEdit = _animal.FirstOrDefault(a => a.index == id);
+        if (animalToEdit == null)
+        {
+            return Results.NotFound($"Animal with id{id} was not found");
+        }
+
+        _animal.Remove(animalToEdit);
+        _animal.Add(animal);
+        return Results.NoContent();
+    })
+    .WithName("UpdateAnimal").WithOpenApi();
+
+app.MapDelete("/api/animals/{id:int}", (int id) =>
+    {
+        var animalToDelete = _animal.FirstOrDefault(a => a.index == id);
+        if (animalToDelete == null)
+        {
+            return Results.NoContent();
+        }
+
+        _animal.Remove(animalToDelete);
+        return Results.NoContent();
+    })
+    .WithName("DeleteAnimal").WithOpenApi();
 
 app.Run();
