@@ -21,10 +21,18 @@ app.UseHttpsRedirection();
 
 var _animal = new List<Animal>
 {
-    new Animal { index = 1, name = "Bolek", category = "Dog", weight = 3.14, furColor = "Grey" },
-    new Animal {index =2, name = "Lolek", category = "Cat", weight = 2.12, furColor = "Blue"},
+    new Animal {index = 1, name = "Bolek", category = "Dog", weight = 3.14, furColor = "Grey" },
+    new Animal {index = 2, name = "Lolek", category = "Cat", weight = 2.12, furColor = "Blue"},
     new Animal {index = 3, name = "Dex", category = "Snake", weight = 0.99, furColor = "Mixed"}
 };
+
+var _visit = new List<Visit>
+{
+    new Visit {visitDate = "2021.01.01", visitAnimal = _animal.Find(a => a.index == 1), visitDescription = "Hip dysplasia", visitPrice = 234.24},
+    new Visit {visitDate = "2022.12.09", visitAnimal = _animal.Find(a => a.index == 2), visitDescription = "Diarrhea with blood", visitPrice = 100},
+    new Visit {visitDate = "2023.06.03", visitAnimal = _animal.Find(a => a.index == 1), visitDescription = "Furr lost", visitPrice = 400.99}
+};
+
 
 app.MapGet("/api/animals", () => Results.Ok(_animal)).WithName("GetStudents").WithOpenApi();
 
