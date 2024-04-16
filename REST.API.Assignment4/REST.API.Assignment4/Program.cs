@@ -34,15 +34,20 @@ var _visit = new List<Visit>
 };
 
 
+// Animal API section =========================================================
+
+//List all animal
 app.MapGet("/api/animals", () => Results.Ok(_animal)).WithName("GetStudents").WithOpenApi();
 
+//List selected animal
 app.MapGet("/api/animals/{id:int}", (int id) =>
     {
         var animal = _animal.FirstOrDefault(a => a.index == id);
-        return animal == null ? Results.NotFound($"Animal with id{id} was not found") : Results.Ok(animal);
+        return animal == null ? Results.NotFound($"Animal with id {id} was not found") : Results.Ok(animal);
     })
     .WithName("GetAnimal").WithOpenApi();
 
+//Add animal
 app.MapPost("/api/animals", (Animal animal) =>
     {
         _animal.Add(animal);
@@ -50,6 +55,7 @@ app.MapPost("/api/animals", (Animal animal) =>
     })
     .WithName("CreateAnimal").WithOpenApi();
 
+//Edit selected animal
 app.MapPut("/api/animals/{id:int}", (int id, Animal animal) =>
     {
         var animalToEdit = _animal.FirstOrDefault(a => a.index == id);
@@ -64,6 +70,7 @@ app.MapPut("/api/animals/{id:int}", (int id, Animal animal) =>
     })
     .WithName("UpdateAnimal").WithOpenApi();
 
+//Delete selected animal
 app.MapDelete("/api/animals/{id:int}", (int id) =>
     {
         var animalToDelete = _animal.FirstOrDefault(a => a.index == id);
@@ -76,5 +83,24 @@ app.MapDelete("/api/animals/{id:int}", (int id) =>
         return Results.NoContent();
     })
     .WithName("DeleteAnimal").WithOpenApi();
+
+
+//Visit API section ============================================================
+
+app.MapGet("/api/visits/{id:int}", (int id) =>
+{
+    var visit = _visit.FindAll(vs => vs.visitAnimal.index == id);
+    bool isEmpty = !visit.Any();
+    return isEmpty ? Results.NotFound($"No visit of animal {id} yet") : Results.Ok(visit);
+}).WithName("VisitList").WithOpenApi();
+
+//Add visit
+app.MapPost("/api/visits", (Visit visit) =>
+    {
+        _visit.Add(visit);
+        return Results.StatusCode(StatusCodes.Status201Created);
+    })
+    .WithName("VisitCreated").WithOpenApi();
+
 
 app.Run();
