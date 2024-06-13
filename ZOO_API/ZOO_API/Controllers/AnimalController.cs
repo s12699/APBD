@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ZOO_API.Models;
 using ZOO_API.Services;
 
 namespace ZOO_API.Controllers;
@@ -20,6 +21,14 @@ public class AnimalController : ControllerBase
     {
         var animals = _animalService.GetAnimals();
         return Ok(animals);
+    }
+
+    [HttpGet("{orderBy}")]
+    public IActionResult GetAnimals(string orderBy)
+    {
+        var animal = _animalService.GetAnimals(orderBy);
+        
+        return Ok(animal);
     }
 
 }

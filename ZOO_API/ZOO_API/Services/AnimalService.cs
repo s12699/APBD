@@ -16,4 +16,9 @@ public class AnimalService : IAnimalService
     {
         return _animalRepository.GetAnimals();
     }
+
+    public IEnumerable<Animal> GetAnimals(string orderBy)
+    {
+        return _animalRepository.GetAnimals(orderBy);
+    }
 }
